@@ -56,4 +56,4 @@ Some locator `name` regexes include **Hebrew alternates** alongside English beca
 
 ## More documentation
 
-See **`automation-guide.md`** for selector placeholders and troubleshooting.
+See **`automation-guide.md`** for explanation of my choices ,  selector placeholders and troubleshooting.
