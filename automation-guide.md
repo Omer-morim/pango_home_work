@@ -134,47 +134,6 @@ Each page object has a companion locators file. Keeping selectors in a dedicated
 One known fragile area: the add-user form is served at /users/add, not on the /users list page. The page object navigates explicitly to /users/add, and the assertion after submission checks that the browser returns to /users. If this routing ever changes, only users.locators.ts and the addUser method need updating.
 
 ---
-
-## 7. Evidence Videos — Fill In Manually
-
-### Workflow 1 — Parking Lifecycle and History
-
-| Field | Value |
-|-------|-------|
-| Video file path | e.g. C:\...\parking-lifecycle.mp4 |
-| Duration (mm:ss) | — |
-| Recording tool / browser | — |
-
-Suggested timeline — replace timestamps from your recording:
-
-| Timestamp | What to highlight |
-|-----------|-------------------|
-| __:__ | Login screen and admin credentials |
-| __:__ | After sign-in — Dashboard shell visible |
-| __:__ | Plate / slot / image filled in and Start Parking clicked |
-| __:__ | Active row + End session |
-| __:__ | History page opens and plate appears in the table |
-
-### Workflow 2 — Create User, Logout, Sign In Again
-
-| Field | Value |
-|-------|-------|
-| Video file path | e.g. C:\...\user-create-relogin.mp4 |
-| Duration (mm:ss) | — |
-| Recording tool / browser | — |
-
-Suggested timeline:
-
-| Timestamp | What to highlight |
-|-----------|-------------------|
-| __:__ | Admin sign-in |
-| __:__ | Users → Add User → form on /users/add |
-| __:__ | New user visible in the list |
-| __:__ | Logout and return to login |
-| __:__ | Sign in as new user and reach Dashboard |
-
----
-
 ## 8. Quick Run
 
 ```bash
