@@ -10,13 +10,13 @@ Exploration & Test Plan | Bug Report | Test Cases
 
 I focused on critical user journeys that affect trust and core operations:
 
-Authentication — login and account-recovery entry points
+**(1) Authentication — login and account-recovery entry points
 
-Dashboard parking lifecycle — start/end session and validation
+**(2) Dashboard parking lifecycle — start/end session and validation
 
-History — the UI truth for completed sessions
+**(3) History — the UI truth for completed sessions
 
-User management — an admin-only surface with destructive actions
+**(4) User management — an admin-only surface with destructive actions
 
 These were prioritized because failures here are high impact: incorrect parking state, misleading security UX, or unsafe admin actions would directly harm users and the company's reputation.
 
@@ -46,17 +46,17 @@ Reproduce, classify impact, and assign Severity/Priority based on user trust and
 
 Risks:
 
-Incorrect parking state shown in the UI (especially mismatches between active sessions and history)
+**(1) Incorrect parking state shown in the UI (especially mismatches between active sessions and history)
 
-Security weaknesses around state-changing actions such as ending a session or admin-only operations
+**(2) Security weaknesses around state-changing actions such as ending a session or admin-only operations
 
 Edge cases:
 
-Active-session limits
+**(1) Active-session limits
 
-Invalid/unexpected file uploads for the image field
+**(2) Invalid/unexpected file uploads for the image field
 
-Session handling around logout/login boundaries
+**(3) Session handling around logout/login boundaries
 
 User flows:
 
