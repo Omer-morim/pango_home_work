@@ -7,7 +7,8 @@ Short reflection on how Part 1 (exploration + test plan) and Part 2 (Playwright 
 ## 1) Overall approach and key decisions
 
 **Exploration and risk focus**  
-Work on the running **Pango** app (local Docker, `BASE_URL` typically `http://localhost:5000`) combined **manual probing** with **agent-assisted exploration**. Manual effort concentrated on **critical journeys**, **boundary behaviour**, and **timing-sensitive** cases (e.g. fast navigation, repeated actions such as double-submit on “start parking”) where human observation catches inconsistencies that are expensive or unreliable to encode first.
+Work on the running **Pango** app (local Docker, `BASE_URL` typically `http://localhost:5000`) combined **manual probing** with **agent-assisted exploration**.
+Manual effort concentrated on **critical journeys**, **boundary behaviour**, and **timing-sensitive** cases (e.g. fast navigation, repeated actions such as double-submit on “start parking”) where human observation catches inconsistencies that are expensive or unreliable to encode first.
  Scripted checks and the agent were used heavily for **breadth**: console errors, obvious DOM/HTML issues, CSRF/session surfaces where observable, and repetitive navigation.
 
 **Automation scope (Part 2)**  
@@ -21,7 +22,8 @@ Defects and scenarios were skewed toward **high / medium** impact (security redi
 **Engineering decisions**  
 - **Page Object Model (POM)** with **per-page locator files** (`*.locators.ts`) to separate “where to click” from “what the test proves”.  
 - **Single config for URLs**: `tests/config/endpoints.ts` exposes `baseURL`, path keys, `path()`, and `appUrl()`; Playwright `use.baseURL` reads the same source to avoid drift.  
-- **Environment-driven URL and credentials**: `BASE_URL` plus `ADMIN_USER` / `ADMIN_PASSWORD` (see `tests/config/credentials.ts`) are read from the environment with sensible local defaults. **No code changes** are required to point the suite at another environment (staging, ephemeral preview, a colleague’s machine) or to inject secrets from a vault in **CI/CD**. That pattern is what DevOps and engineering teams usually expect: the pipeline supplies variables; the same artefact runs everywhere. It raises practical value beyond a one-off homework run.  
+- **Environment-driven URL and credentials**: `BASE_URL` plus `ADMIN_USER` / `ADMIN_PASSWORD` (see `tests/config/credentials.ts`) are read from the environment with sensible local defaults.
+- **No code changes** are required to point the suite at another environment (staging, ephemeral preview, a colleague’s machine) or to inject secrets from a vault in **CI/CD**. That pattern is what DevOps and engineering teams usually expect: the pipeline supplies variables; the same artefact runs everywhere. It raises practical value beyond a one-off homework run.  
 - **Assertions after meaningful steps**: URL checks, visible shell (e.g. Dashboard link), table row presence/absence, History table shell, **exact** plate text to avoid partial digit matches.  
 - **Playwright-native stability**: auto-waiting, `expect` assertions, no arbitrary sleeps; timeouts set in config for actions and navigation.
 
@@ -32,7 +34,8 @@ Defects and scenarios were skewed toward **high / medium** impact (security redi
 | Decision | Trade-off | Rationale |
 |------------|-------------|-----------|
 | **POM vs inline tests** | More files and indirection up front | Locator churn is localised; specs stay readable and intent-driven. |
-| **Parallel execution** | Higher risk of shared-state clashes on a **live DB** | The repo uses **`fullyParallel: true`** (and multiple browser projects). **Mitigation** is **unique data per run** (timestamp-derived plate, slot, username), not serial execution. A valid alternative would be `fullyParallel: false` or a single worker for maximum isolation on a tiny environment; here speed and multi-browser coverage were preferred with data isolation. |
+| **Parallel execution** | Higher risk of shared-state clashes on a **live DB** | The repo uses **`fullyParallel: true`** (and multiple browser projects).
+**Mitigation** is **unique data per run** (timestamp-derived plate, slot, username), not serial execution. A valid alternative would be `fullyParallel: false` or a single worker for maximum isolation on a tiny environment; here speed and multi-browser coverage were preferred with data isolation. |
 | **Timestamp-based identifiers** | DB noise over time without cleanup | Zero manual teardown; avoids flaky collisions between workers or re-runs. |
 | **`getByRole` first, `#id` / structure fallbacks** | Roles fail if labels/roles are weak; regex may need **Hebrew + English** variants for this build | More resilient to cosmetic CSS changes than long XPath; fallbacks match the actual homework DOM. |
 | **No `data-testid` in the app** | Selectors depend on visible text, roles, or ids | The homework UI did not expose stable test hooks. The compromise is documented locators and **coupling to visible copy / language** (e.g. Hebrew button labels). **Recommendation to developers (also for an oral reflection):** add **`data-testid`** (or equivalent stable attributes) on critical controls and form fields so automation can be **fully decoupled** from wording, RTL/LTR, and cosmetic restyling—tests would target intent, not typography. |
