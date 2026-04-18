@@ -78,7 +78,7 @@ The following table summarizes all significant bugs identified during the explor
 | Steps to Reproduce | 1) Open /login  2) Click 'אפשר לאפס כאן' | 1) Open /login  2) Click password visibility toggle (#togglePassword) | 1) Enter wrong credentials  2) Submit login | 1) View HTML source of /login | 1) Dashboard → select file example.pn  2) Start Parking (no error)  3) End session  4) Open attachment from History on client PC |
 | Expected | In-app password reset flow or verified, trusted reset provider | Toggle works; no console errors | Clear authentication error message | Valid <body> tag | Reject invalid uploads before session persistence or clear in-app error; magic bytes, MIME allowlist, max size; History must not expose broken files silently |
 | Actual | User is sent to https://cataas.com/cat — phishing/trust risk | Console error: Cannot read properties of null (reading 'classList') | Stays on /login; no visible error elements | Stray tags after <body> | Flow succeeds; History lists activity; OS-level invalid file; no in-app warning at any stage |
-| Evidence / Notes | href points to cataas.com/cat (offending HTML fragment) | Empty #togglePassword button; script uses querySelector('span') | login.html ~line 92 | login.html ~line 92 | e.g. tmpexample.pn; same class of issue for other misleading/non-image files |
+
 
 ---
 
