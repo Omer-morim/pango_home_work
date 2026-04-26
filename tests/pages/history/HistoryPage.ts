@@ -11,17 +11,23 @@ export class HistoryPage {
     await expect(this.page).toHaveURL(/\/history/);
   }
 
-// After navigation: URL + history table body visible. 
+  /** After navigation: URL + history table body visible. */
   async expectHistoryShell(): Promise<void> {
     await expect(this.page).toHaveURL(/\/history/);
     await expect(this.page.locator(historyLocators.tableBody)).toBeVisible();
   }
 
-
- //  Assert plate appears as stable text (exact match avoids partial digit collisions).
-  
+  /**
+   * Assert plate appears as stable text (exact match avoids partial digit collisions).
+   */
   async expectPlateRecorded(plate: string): Promise<void> {
     const scope = this.page.locator(historyLocators.main).or(this.page.locator('body'));
     await expect(scope.getByText(plate, { exact: true })).toBeVisible();
+  }
+
+  async expectRecordRowContains(plate: string, slot: string): Promise<void> {
+    const row = this.page.locator(historyLocators.tableBody).locator('tr', { hasText: plate });
+    await expect(row).toBeVisible();
+    await expect(row).toContainText(slot);
   }
 }
