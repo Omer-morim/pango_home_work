@@ -7,11 +7,11 @@ export class LoginPage {
   constructor(private readonly page: Page) {}
 
   private username() {
-    return this.page.locator(loginLocators.class_and_id.username);
+    return this.page.locator(loginLocators.ids.username);
   }
 
   private password() {
-    return this.page.locator(loginLocators.class_and_id.password);
+    return this.page.locator(loginLocators.ids.password);
   }
 
   private submit() {
@@ -23,7 +23,7 @@ export class LoginPage {
     await this.expectOnLoginPage();
   }
 
- // Assert login route and primary submit control. 
+  /** Assert login route and primary submit control. */
   async expectOnLoginPage(): Promise<void> {
     await expect(this.page).toHaveURL(/\/login/);
     await expect(this.submit()).toBeVisible();
@@ -34,6 +34,13 @@ export class LoginPage {
     await this.password().fill(password);
     await this.submit().click();
     await expect(this.page).not.toHaveURL(/\/login/);
+  }
+
+  async loginExpectFailure(username: string, password: string): Promise<void> {
+    await this.username().fill(username);
+    await this.password().fill(password);
+    await this.submit().click();
+    await this.expectOnLoginPage();
   }
 
   async expectAuthenticated(): Promise<void> {
