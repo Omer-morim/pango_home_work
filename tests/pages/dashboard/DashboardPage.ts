@@ -57,6 +57,13 @@ export class DashboardPage {
     await expect(this.rowForPlate(plate)).toHaveCount(0);
   }
 
+  async expectValidationMessageVisible(
+    message: RegExp = /invalid|error|must|exactly|digits|license|plate|slot|upload|image|warning|failed|שגיאה|חניות/i,
+  ): Promise<void> {
+    const feedback = this.page.locator('.alert, .invalid-feedback, [role="alert"], .text-danger');
+    await expect(feedback.filter({ hasText: message }).first()).toBeVisible();
+  }
+
   async openHistoryNav(): Promise<void> {
     const { role, name } = dashboardLocators.nav.history;
     await this.page.getByRole(role, { name }).click();
