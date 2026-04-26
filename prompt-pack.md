@@ -203,7 +203,7 @@ These are **small, high-signal** upgrades scoped strictly to `tests/parking-life
 
 ## 9) Optional tooling recommendations (next-level Playwright suite)
 
-These are **optional** add-ons—nothing here is required for the homework deliverable, but they commonly improve **code quality**, **maintainability**, and **observability** when you grow the suite.
+These are **optional** add-ons - commonly improve **code quality**, **maintainability**, and **observability** when you grow the suite.
 
 ### Code quality and maintenance
 
