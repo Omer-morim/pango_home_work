@@ -145,28 +145,7 @@ This section intentionally extends only the two workflows already implemented, w
 
 ---
 
-## 6) Ready-to-Send Message (Email / WhatsApp)
-
-Hi,  
-Following your feedback, I am sharing the prompt pack that guided the implementation, to show the reasoning process and decision framework behind the submission (not just the final artifacts).
-
-Included:
-- The core prompts that drove planning, implementation, and refinement.
-- A short rationale for what each prompt contributed methodologically.
-- A **full step-by-step map** (with assertions) for the two implemented end-to-end workflows:
-  1) **Login → Start Parking → End → History**  
-  2) **Create User → Logout → Login as New User**
-- A focused improvement plan that deepens **only** those two workflows (no unrelated new scenarios at this stage).
-- A concise list of **professional polish** ideas scoped **only** to the two shipped spec files (`parking-lifecycle`, `user-create-login`).
-- Optional **tooling** recommendations (linting, reporting, env helpers) for future iterations.
-
-The goal is to demonstrate a quality-driven approach: business-critical coverage, maintainable engineering choices, and controlled iteration based on feedback.
-
-Happy to walk through the technical decisions live (POM structure, locator strategy, assertion design, and run stability).
-
----
-
-## 7) Implemented updates map (what changed and where)
+## 6) Implemented updates map (what changed and where)
 
 This section provides a clear file-by-file map of the improvements that were actually implemented.
 
@@ -181,7 +160,7 @@ This section provides a clear file-by-file map of the improvements that were act
 
 ---
 
-## 8) Professional additions — only the two specs that were actually shipped
+## 7) Professional additions — only the two specs that were actually shipped
 
 These are **small, high-signal** upgrades scoped strictly to `tests/parking-lifecycle.spec.ts` and `tests/user-create-login.spec.ts`. They do not require new product scenarios beyond what those files already represent.
 
@@ -201,7 +180,7 @@ These are **small, high-signal** upgrades scoped strictly to `tests/parking-life
 
 ---
 
-## 9) Optional tooling recommendations (next-level Playwright suite)
+## 8) Optional tooling recommendations (next-level Playwright suite)
 
 These are **optional** add-ons - commonly improve **code quality**, **maintainability**, and **observability** when you grow the suite.
 
